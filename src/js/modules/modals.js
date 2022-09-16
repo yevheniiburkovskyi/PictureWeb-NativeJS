@@ -49,11 +49,11 @@ function modal(btn, selector, closeBtn) {
         }
     });
 
-    setTimeout(() => {
-        if (!document.querySelector(".popup-consultation").classList.contains("fadeIn")) {
-            openModal(document.querySelector(".popup-consultation"));
-        }
-    }, 60000);
+    // setTimeout(() => {
+    //     if (!document.querySelector(".popup-consultation").classList.contains("fadeIn")) {
+    //         openModal(document.querySelector(".popup-consultation"));
+    //     }
+    // }, 60000);
 
     function openByScroll(selector) {
         window.addEventListener('scroll', () => {

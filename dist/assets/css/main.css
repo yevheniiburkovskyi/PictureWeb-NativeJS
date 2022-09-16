@@ -1725,3 +1725,6 @@ h4 {
     width: 25rem;
   }
 }
+form {
+  text-align: center;
+}
