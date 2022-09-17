@@ -21,7 +21,7 @@ function forms() {
     };
 
     const postData = async (url, data) => {
-        document.querySelector('.statusImg').setAttribute('src', message.loading);
+        document.querySelector('.statusImg').setAttribute('src', message.loadingImg);
         document.querySelector(".status").textContent = "Please wait";
         let res = await fetch(url, {
             method: 'POST',
@@ -33,7 +33,11 @@ function forms() {
 
     upload.forEach(item => {
         item.addEventListener('input', () => {
-            item.previousElementSibling.innerHTML = `${item.files[0].name}`;
+            let fileNameArr = item.files[0].name.split('.');
+            let dots;
+            fileNameArr[0].length > 6 ? dots = '...' : dots = '.';
+            const fileName = fileNameArr[0].slice(0, 6) + dots + fileNameArr[fileNameArr.length - 1];
+            item.previousElementSibling.innerHTML = `${fileName}`;
         });
     });
 
