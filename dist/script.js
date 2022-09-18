@@ -4211,6 +4211,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
 /* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
+/* harmony import */ var _modules_hover__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/hover */ "./src/js/modules/hover.js");
+
 
 
 
@@ -4229,6 +4231,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="phone"]');
   Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_4__["default"])('.button-styles', 'flipInX');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  Object(_modules_hover__WEBPACK_IMPORTED_MODULE_6__["default"])();
 });
 
 /***/ }),
@@ -4363,6 +4366,48 @@ function forms() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (forms);
+
+/***/ }),
+
+/***/ "./src/js/modules/hover.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/hover.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function hover() {
+  var blocks = document.querySelectorAll('.sizes-block');
+  blocks.forEach(function (block, i) {
+    var blockImg = document.querySelectorAll('.sizes-block > img')[i];
+    block.addEventListener('mouseenter', function () {
+      blockImg.classList.add('animated', 'swing');
+      blockImg.src = "assets/img/sizes-".concat(i + 1, "-1.png");
+      block.querySelectorAll('p').forEach(function (item, i) {
+        item.style.display = 'none';
+
+        if (i == 3) {
+          item.style.display = 'block';
+        }
+      });
+    });
+    block.addEventListener('mouseleave', function () {
+      blockImg.classList.remove('swing');
+      blockImg.src = "assets/img/sizes-".concat(i + 1, ".png");
+      block.querySelectorAll('p').forEach(function (item) {
+        item.style.display = 'block';
+      });
+    });
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (hover);
 
 /***/ }),
 

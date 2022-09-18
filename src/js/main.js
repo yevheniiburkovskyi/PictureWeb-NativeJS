@@ -4,6 +4,7 @@ import form from "./modules/forms";
 import mask from './modules/mask';
 import showMoreStyles from './modules/showMoreStyles';
 import tabs from './modules/tabs';
+import hover from './modules/hover';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -17,4 +18,5 @@ window.addEventListener('DOMContentLoaded', () => {
     mask('[name="phone"]');
     showMoreStyles('.button-styles', 'flipInX');
     tabs();
+    hover();
 });
