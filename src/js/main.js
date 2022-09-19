@@ -7,6 +7,7 @@ import tabs from './modules/tabs';
 import hover from './modules/hover';
 import calc from './modules/calc';
 import accordion from './modules/accordion';
+import burger from './modules/burger';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -23,4 +24,5 @@ window.addEventListener('DOMContentLoaded', () => {
     hover();
     calc();
     accordion();
+    burger();
 });
