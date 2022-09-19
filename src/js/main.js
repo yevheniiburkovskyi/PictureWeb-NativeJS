@@ -5,6 +5,8 @@ import mask from './modules/mask';
 import showMoreStyles from './modules/showMoreStyles';
 import tabs from './modules/tabs';
 import hover from './modules/hover';
+import calc from './modules/calc';
+import accordion from './modules/accordion';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -19,4 +21,6 @@ window.addEventListener('DOMContentLoaded', () => {
     showMoreStyles('.button-styles', 'flipInX');
     tabs();
     hover();
+    calc();
+    accordion();
 });

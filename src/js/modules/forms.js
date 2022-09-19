@@ -1,4 +1,4 @@
-
+import { postData } from '../services/requests';
 function forms() {
 
     const form = document.querySelectorAll("form"),
@@ -18,17 +18,6 @@ function forms() {
     const path = {
         designer: 'assets/server.php',
         question: 'assets/question.php'
-    };
-
-    const postData = async (url, data) => {
-        document.querySelector('.statusImg').setAttribute('src', message.loadingImg);
-        document.querySelector(".status").textContent = "Please wait";
-        let res = await fetch(url, {
-            method: 'POST',
-            body: data
-        });
-
-        return await res.text();
     };
 
     upload.forEach(item => {

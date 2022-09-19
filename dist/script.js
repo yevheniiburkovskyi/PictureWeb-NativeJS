@@ -4212,6 +4212,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
 /* harmony import */ var _modules_hover__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/hover */ "./src/js/modules/hover.js");
+/* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+
+
 
 
 
@@ -4232,7 +4236,87 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_4__["default"])('.button-styles', 'flipInX');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_hover__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_8__["default"])();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/accordion.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/accordion.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function accordion() {
+  var btns = document.querySelectorAll('.accordion-heading');
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btns.forEach(function (item) {
+        item.classList.remove('active-style');
+        item.nextElementSibling.classList.remove('active-content');
+        item.nextElementSibling.style.maxHeight = '0px';
+      });
+      this.classList.toggle('active-style');
+      this.nextElementSibling.classList.toggle('active-content');
+
+      if (this.classList.contains('active-style')) {
+        this.nextElementSibling.style.maxHeight = this.nextElementSibling.scrollHeight + 80 + "px";
+      } else {
+        this.nextElementSibling.style.maxHeight = '0px';
+      }
+    });
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (accordion);
+
+/***/ }),
+
+/***/ "./src/js/modules/calc.js":
+/*!********************************!*\
+  !*** ./src/js/modules/calc.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function calc() {
+  var size = document.querySelector('#size'),
+      material = document.querySelector('#material'),
+      options = document.querySelector('#options'),
+      promocode = document.querySelector('.promocode'),
+      resultBox = document.querySelector('.calc-price');
+
+  var getPrice = function getPrice(e) {
+    var sum = Math.round(+size.value) * +material.value + +options.value;
+
+    if (size.value == '' || material.value == '') {
+      resultBox.textContent = 'Для расчета нужно выбрать размер картины и материал картины';
+    } else if (promocode.value === 'IWANTPOPART') {
+      resultBox.textContent = 'Your price: ' + Math.round(sum * 0.7);
+      resultBox.style.cssText = "font-size: 36px; font-weight: 600;";
+    } else {
+      resultBox.textContent = 'Your price: ' + sum;
+      resultBox.style.cssText = "font-size: 36px; font-weight: 600;";
+    }
+  };
+
+  size.addEventListener('change', getPrice);
+  material.addEventListener('change', getPrice);
+  options.addEventListener('change', getPrice);
+  promocode.addEventListener('change', getPrice);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (calc);
 
 /***/ }),
 
@@ -4259,8 +4343,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _services_requests__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/requests */ "./src/js/services/requests.js");
 
 
 
@@ -4287,37 +4370,6 @@ function forms() {
     designer: 'assets/server.php',
     question: 'assets/question.php'
   };
-
-  var postData = function postData(url, data) {
-    var res;
-    return regeneratorRuntime.async(function postData$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            document.querySelector('.statusImg').setAttribute('src', message.loadingImg);
-            document.querySelector(".status").textContent = "Please wait";
-            _context.next = 4;
-            return regeneratorRuntime.awrap(fetch(url, {
-              method: 'POST',
-              body: data
-            }));
-
-          case 4:
-            res = _context.sent;
-            _context.next = 7;
-            return regeneratorRuntime.awrap(res.text());
-
-          case 7:
-            return _context.abrupt("return", _context.sent);
-
-          case 8:
-          case "end":
-            return _context.stop();
-        }
-      }
-    });
-  };
-
   upload.forEach(function (item) {
     item.addEventListener('input', function () {
       var fileNameArr = item.files[0].name.split('.');
@@ -4339,7 +4391,7 @@ function forms() {
       var formData = new FormData(item);
       var api;
       item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
-      postData(api, formData).then(function (result) {
+      Object(_services_requests__WEBPACK_IMPORTED_MODULE_7__["postData"])(api, formData).then(function (result) {
         console.log(result);
         statusImg.setAttribute('src', message.doneImg);
         element.innerHTML = message.done;
@@ -4554,10 +4606,13 @@ function modal(btn, selector, closeBtn) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_requests__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/requests */ "./src/js/services/requests.js");
+
 
 
 function showMoreStyles(trigger, animationStyle) {
   var btn = document.querySelector(trigger),
+      wrapper = document.querySelector('.styles > div > div'),
       items = document.querySelectorAll(".hidden-lg");
   btn.addEventListener('click', function () {
     items.forEach(function (item) {
@@ -4565,7 +4620,24 @@ function showMoreStyles(trigger, animationStyle) {
       item.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1', 'animated', animationStyle);
     });
     btn.remove();
-  });
+  }); // btn.addEventListener('click', () => {
+  //     requestData('http://localhost:3000/styles').then(res => createCards(JSON.parse(res)));
+  //     btn.remove();
+  // });
+  // function createCards(response) {
+  //     response.forEach(item => {
+  //         const card = document.createElement('div');
+  //         card.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1', 'animated', animationStyle);
+  //         card.innerHTML = `
+  //         <div class=styles-block>
+  //             <img src=${item.src} alt>
+  //             <h4>${item.title}</h4>
+  //             <a href="${item.link}">Подробнее</a>
+  //         </div>
+  //         `;
+  //         wrapper.appendChild(card);
+  //     });
+  // }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (showMoreStyles);
@@ -4707,6 +4779,85 @@ var tabs = function tabs() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (tabs);
+
+/***/ }),
+
+/***/ "./src/js/services/requests.js":
+/*!*************************************!*\
+  !*** ./src/js/services/requests.js ***!
+  \*************************************/
+/*! exports provided: postData, requestData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postData", function() { return postData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestData", function() { return requestData; });
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var postData = function postData(url, data) {
+  var res;
+  return regeneratorRuntime.async(function postData$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          document.querySelector(".status").textContent = "Please wait";
+          _context.next = 3;
+          return regeneratorRuntime.awrap(fetch(url, {
+            method: 'POST',
+            body: data
+          }));
+
+        case 3:
+          res = _context.sent;
+          _context.next = 6;
+          return regeneratorRuntime.awrap(res.text());
+
+        case 6:
+          return _context.abrupt("return", _context.sent);
+
+        case 7:
+        case "end":
+          return _context.stop();
+      }
+    }
+  });
+};
+
+var requestData = function requestData(url) {
+  var res;
+  return regeneratorRuntime.async(function requestData$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return regeneratorRuntime.awrap(fetch(url));
+
+        case 2:
+          res = _context2.sent;
+          _context2.next = 5;
+          return regeneratorRuntime.awrap(res.text());
+
+        case 5:
+          return _context2.abrupt("return", _context2.sent);
+
+        case 6:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  });
+};
+
+
 
 /***/ })
 
