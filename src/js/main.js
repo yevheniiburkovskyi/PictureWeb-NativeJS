@@ -8,6 +8,7 @@ import hover from './modules/hover';
 import calc from './modules/calc';
 import accordion from './modules/accordion';
 import burger from './modules/burger';
+import scrolling from './modules/scrolling';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -25,4 +26,5 @@ window.addEventListener('DOMContentLoaded', () => {
     calc();
     accordion();
     burger();
+    scrolling();
 });

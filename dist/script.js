@@ -4215,6 +4215,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
 /* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
 /* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
+/* harmony import */ var _modules_scrolling__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/scrolling */ "./src/js/modules/scrolling.js");
+
 
 
 
@@ -4241,6 +4243,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_8__["default"])();
   Object(_modules_burger__WEBPACK_IMPORTED_MODULE_9__["default"])();
+  Object(_modules_scrolling__WEBPACK_IMPORTED_MODULE_10__["default"])();
 });
 
 /***/ }),
@@ -4623,6 +4626,72 @@ function modal(btn, selector, closeBtn) {
 /* harmony default export */ __webpack_exports__["default"] = (modal);
 
 
+
+/***/ }),
+
+/***/ "./src/js/modules/scrolling.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/scrolling.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var scrolling = function scrolling() {
+  var upElem = document.querySelector('.pageup');
+  window.addEventListener('scroll', function () {
+    if (document.documentElement.scrollTop > 1650) {
+      upElem.classList.add('animated', 'fadeIn');
+      upElem.classList.remove('fadeOut');
+    } else {
+      upElem.classList.add('fadeOut');
+      upElem.classList.remove('fadeIn');
+    }
+  }); //scrolling with raf (request animation frame)
+
+  var links = document.querySelectorAll('[href^="#"]'),
+      // собирает все ссылки со страницы
+  speed = 0.1; // скорость прокрутки (чем меньше, тем быстрее прокрутка)
+
+  links.forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      var widthTop = document.documentElement.scrollTop,
+          // scrollTop возвращает количество пикселей, прокрученных от верха элемента
+      hash = this.hash,
+          toBlock = document.querySelector(hash).getBoundingClientRect().top,
+          //возвращает размер элемента и его позицию относительно viewport (расстояние до него от верха в данном случае)
+      start = null;
+      requestAnimationFrame(step);
+
+      function step(time) {
+        // аргумент time передается автоматически
+        if (start === null) {
+          // проверяем первый ли раз запущена уже анимация
+          start = time;
+        }
+
+        var progress = time - start,
+            r = toBlock < 0 ? Math.max(widthTop - progress / speed, widthTop + toBlock) : Math.min(widthTop + progress / speed, widthTop + toBlock); //измеряем количество пикселей до объекта (вниз/вверх)
+
+        document.documentElement.scrollTo(0, r); // прокрутка документа до указанных координат (x,y)
+
+        if (r != widthTop + toBlock) {
+          requestAnimationFrame(step);
+        } else {
+          location.hash = hash; //DOMString, содержащий '#' с последующим идентификатором.
+        }
+      }
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (scrolling);
 
 /***/ }),
 
