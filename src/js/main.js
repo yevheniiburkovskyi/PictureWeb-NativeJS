@@ -9,6 +9,7 @@ import calc from './modules/calc';
 import accordion from './modules/accordion';
 import burger from './modules/burger';
 import scrolling from './modules/scrolling';
+import drop from './modules/drop';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -27,4 +28,5 @@ window.addEventListener('DOMContentLoaded', () => {
     accordion();
     burger();
     scrolling();
+    drop();
 });
