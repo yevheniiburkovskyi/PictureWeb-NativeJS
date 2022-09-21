@@ -10,6 +10,7 @@ The main goal of this project was to consolidate the theoretical knowledge of in
 - Bootstrap
 - JavaScript (Native)
 - Webpack
+- Gulp
 - JSON Placeholder
 ***
 ## Created scripts
