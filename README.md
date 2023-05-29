@@ -4,6 +4,9 @@
 ## Task
 The main goal of this project was to consolidate the theoretical knowledge of interaction with DOM elements on the page and learn how to write the simple scripts for websites, "GET" and "POST" requests to the server. Also learn how to build a project on a modular structure using webpack. The project was received with a ready-made layout .
 ***
+## Deploy
+https://eugeneburkovskiy.github.io/PictureWeb-NativeJS/dist
+***
 ## Technologies
 - HTML
 - CSS
