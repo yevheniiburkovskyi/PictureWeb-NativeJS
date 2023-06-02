@@ -12,7 +12,6 @@ https://eugeneburkovskiy.github.io/PictureWeb-NativeJS/dist
 - CSS
 - Bootstrap
 - JavaScript (Native)
-- Webpack
 - Gulp
 - JSON Placeholder
 ***
